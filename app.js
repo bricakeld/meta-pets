@@ -1,5 +1,70 @@
 // Pocket Critters - Virtual Pet App
 
+// ============================================
+// PET REGISTRY - Add new pets here!
+// ============================================
+const PET_TYPES = {
+    dog: {
+        name: 'Dog',
+        template: `
+            <div class="dog">
+                <div class="dog-body"></div>
+                <div class="dog-head">
+                    <div class="dog-ear left"></div>
+                    <div class="dog-ear right"></div>
+                    <div class="dog-face">
+                        <div class="dog-eye left"></div>
+                        <div class="dog-eye right"></div>
+                        <div class="dog-nose"></div>
+                        <div class="dog-mouth"></div>
+                    </div>
+                </div>
+                <div class="dog-tail"></div>
+                <div class="dog-legs">
+                    <div class="dog-leg front-left"></div>
+                    <div class="dog-leg front-right"></div>
+                    <div class="dog-leg back-left"></div>
+                    <div class="dog-leg back-right"></div>
+                </div>
+            </div>
+        `
+    },
+    cat: {
+        name: 'Cat',
+        template: `
+            <div class="cat">
+                <div class="cat-body"></div>
+                <div class="cat-head">
+                    <div class="cat-ear left"></div>
+                    <div class="cat-ear right"></div>
+                    <div class="cat-face">
+                        <div class="cat-eye left"></div>
+                        <div class="cat-eye right"></div>
+                        <div class="cat-nose"></div>
+                        <div class="cat-whiskers left">
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                        </div>
+                        <div class="cat-whiskers right">
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                            <div class="whisker"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cat-tail"></div>
+                <div class="cat-legs">
+                    <div class="cat-leg front-left"></div>
+                    <div class="cat-leg front-right"></div>
+                    <div class="cat-leg back-left"></div>
+                    <div class="cat-leg back-right"></div>
+                </div>
+            </div>
+        `
+    }
+};
+
 class VirtualPet {
     constructor() {
         this.petType = null;
@@ -12,17 +77,37 @@ class VirtualPet {
     }
     
     init() {
+        this.renderPetChoices();
         this.bindEvents();
         this.loadSavedPet();
     }
     
+    renderPetChoices() {
+        const container = document.getElementById('pet-choices-container');
+        container.innerHTML = '';
+        
+        for (const [petId, petData] of Object.entries(PET_TYPES)) {
+            const button = document.createElement('button');
+            button.className = 'pet-choice';
+            button.dataset.pet = petId;
+            button.innerHTML = `
+                <div class="pet-preview ${petId}-preview">
+                    ${petData.template}
+                </div>
+                <span>${petData.name}</span>
+            `;
+            container.appendChild(button);
+        }
+    }
+    
     bindEvents() {
-        // Pet selection
-        document.querySelectorAll('.pet-choice').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const petType = e.currentTarget.dataset.pet;
+        // Pet selection (use event delegation for dynamically created buttons)
+        document.getElementById('pet-choices-container').addEventListener('click', (e) => {
+            const btn = e.target.closest('.pet-choice');
+            if (btn) {
+                const petType = btn.dataset.pet;
                 this.selectPet(petType);
-            });
+            }
         });
         
         // Confirm name
@@ -238,78 +323,8 @@ class VirtualPet {
     }
     
     getPetHTML(type) {
-        const petTemplates = {
-            bird: `
-                <div class="bird">
-                    <div class="bird-body"></div>
-                    <div class="bird-wing"></div>
-                    <div class="bird-head">
-                        <div class="bird-eye"></div>
-                        <div class="bird-beak"></div>
-                    </div>
-                    <div class="bird-tail"></div>
-                    <div class="bird-legs">
-                        <div class="bird-leg"></div>
-                        <div class="bird-leg"></div>
-                    </div>
-                </div>
-            `,
-            dog: `
-                <div class="dog">
-                    <div class="dog-body"></div>
-                    <div class="dog-head">
-                        <div class="dog-ear left"></div>
-                        <div class="dog-ear right"></div>
-                        <div class="dog-face">
-                            <div class="dog-eye left"></div>
-                            <div class="dog-eye right"></div>
-                            <div class="dog-nose"></div>
-                            <div class="dog-mouth"></div>
-                        </div>
-                    </div>
-                    <div class="dog-tail"></div>
-                    <div class="dog-legs">
-                        <div class="dog-leg front-left"></div>
-                        <div class="dog-leg front-right"></div>
-                        <div class="dog-leg back-left"></div>
-                        <div class="dog-leg back-right"></div>
-                    </div>
-                </div>
-            `,
-            cat: `
-                <div class="cat">
-                    <div class="cat-body"></div>
-                    <div class="cat-head">
-                        <div class="cat-ear left"></div>
-                        <div class="cat-ear right"></div>
-                        <div class="cat-face">
-                            <div class="cat-eye left"></div>
-                            <div class="cat-eye right"></div>
-                            <div class="cat-nose"></div>
-                            <div class="cat-whiskers left">
-                                <div class="whisker"></div>
-                                <div class="whisker"></div>
-                                <div class="whisker"></div>
-                            </div>
-                            <div class="cat-whiskers right">
-                                <div class="whisker"></div>
-                                <div class="whisker"></div>
-                                <div class="whisker"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cat-tail"></div>
-                    <div class="cat-legs">
-                        <div class="cat-leg front-left"></div>
-                        <div class="cat-leg front-right"></div>
-                        <div class="cat-leg back-left"></div>
-                        <div class="cat-leg back-right"></div>
-                    </div>
-                </div>
-            `
-        };
-        
-        return petTemplates[type] || '';
+        const pet = PET_TYPES[type];
+        return pet ? pet.template : '';
     }
     
     capitalize(str) {

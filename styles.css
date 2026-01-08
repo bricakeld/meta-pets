@@ -148,115 +148,6 @@ header h1 {
     position: relative;
 }
 
-/* ========== BIRD STYLES ========== */
-.bird {
-    position: relative;
-    width: 60px;
-    height: 50px;
-    animation: birdBob 1s ease-in-out infinite;
-}
-
-@keyframes birdBob {
-    0%, 100% { transform: translateY(0) rotate(-2deg); }
-    50% { transform: translateY(-5px) rotate(2deg); }
-}
-
-.bird-body {
-    position: absolute;
-    width: 40px;
-    height: 30px;
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-    border-radius: 50% 50% 45% 45%;
-    top: 15px;
-    left: 10px;
-    box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2);
-}
-
-.bird-wing {
-    position: absolute;
-    width: 20px;
-    height: 15px;
-    background: linear-gradient(135deg, #3db8b0, #2d8a7e);
-    border-radius: 50% 50% 20% 50%;
-    top: 18px;
-    left: 8px;
-    transform-origin: right center;
-    animation: wingFlap 0.3s ease-in-out infinite;
-}
-
-@keyframes wingFlap {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(20deg); }
-}
-
-.bird-head {
-    position: absolute;
-    width: 25px;
-    height: 22px;
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-    border-radius: 50%;
-    top: 5px;
-    left: 30px;
-}
-
-.bird-eye {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: #fff;
-    border-radius: 50%;
-    top: 6px;
-    left: 12px;
-}
-
-.bird-eye::after {
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #1a1a2e;
-    border-radius: 50%;
-    top: 2px;
-    left: 3px;
-}
-
-.bird-beak {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 10px solid #ff9f43;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    top: 10px;
-    left: 20px;
-}
-
-.bird-tail {
-    position: absolute;
-    width: 15px;
-    height: 12px;
-    background: linear-gradient(135deg, #3db8b0, #2d8a7e);
-    border-radius: 5px 50% 50% 5px;
-    top: 25px;
-    left: -2px;
-    transform: rotate(-15deg);
-}
-
-.bird-legs {
-    position: absolute;
-    bottom: -8px;
-    left: 20px;
-    display: flex;
-    gap: 8px;
-}
-
-.bird-leg {
-    width: 3px;
-    height: 10px;
-    background: #ff9f43;
-    border-radius: 2px;
-}
-
 /* ========== DOG STYLES ========== */
 .dog {
     position: relative;
@@ -1015,7 +906,6 @@ input[type="text"]:focus {
 }
 
 /* Eating animation */
-.pet-eating .bird,
 .pet-eating .dog,
 .pet-eating .cat {
     animation: eating 0.3s ease-in-out 3;
@@ -1027,11 +917,6 @@ input[type="text"]:focus {
 }
 
 /* Hungry state */
-.pet-hungry .bird-body,
-.pet-hungry .bird-head {
-    filter: saturate(0.5);
-}
-
 .pet-hungry .dog-body,
 .pet-hungry .dog-head {
     filter: saturate(0.5);
