@@ -1,0 +1,24 @@
+/* ============================================
+   SHARED PET ANIMATIONS
+   Common animations used by all pet types
+   ============================================ */
+
+/* Eating animation - used when pet is fed */
+@keyframes eating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Playing animation - for future play action */
+@keyframes playing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+/* Sleeping animation - for future sleep action */
+@keyframes sleeping {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+}
+

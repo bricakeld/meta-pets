@@ -4,10 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pocket Critters</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components/selection.css">
+    <link rel="stylesheet" href="styles/components/naming.css">
+    <link rel="stylesheet" href="styles/components/habitat.css">
+    <link rel="stylesheet" href="styles/components/stats.css">
+    <link rel="stylesheet" href="styles/components/actions.css">
+    <link rel="stylesheet" href="styles/components/modal.css">
+    <link rel="stylesheet" href="styles/pets/_shared.css">
+    <link rel="stylesheet" href="styles/pets/dog.css">
+    <link rel="stylesheet" href="styles/pets/cat.css">
 </head>
 <body>
     <div class="app-container">
@@ -20,7 +33,7 @@
         <section id="selection-screen" class="screen active">
             <h2>Choose Your Critter</h2>
             <div id="pet-choices-container" class="pet-choices">
-                <!-- Pet choices are dynamically generated from PET_TYPES in app.js -->
+                <!-- Pet choices are dynamically generated from PET_TYPES registry -->
             </div>
         </section>
 
@@ -62,25 +75,13 @@
             </div>
 
             <div class="stats-panel">
-                <div class="stat">
-                    <div class="stat-label">
-                        <span class="stat-icon">🍗</span>
-                        <span>Hunger</span>
-                    </div>
-                    <div class="stat-bar-container">
-                        <div class="stat-bar" id="hunger-bar">
-                            <div class="stat-fill"></div>
-                        </div>
-                        <span class="stat-value" id="hunger-value">100%</span>
-                    </div>
+                <div id="stats-container" class="stats-container">
+                    <!-- Stats are dynamically generated from STATS registry -->
                 </div>
             </div>
 
-            <div class="action-buttons">
-                <button id="feed-btn" class="btn action-btn">
-                    <span class="btn-icon-large">🍖</span>
-                    <span>Feed</span>
-                </button>
+            <div id="actions-container" class="action-buttons">
+                <!-- Action buttons are dynamically generated from ACTIONS registry -->
                 <button id="change-pet-btn" class="btn secondary">
                     <span class="btn-icon-large">🔄</span>
                     <span>Change Pet</span>
@@ -101,7 +102,7 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- ES Module -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
-

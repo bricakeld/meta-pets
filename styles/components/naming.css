@@ -1,0 +1,33 @@
+/* ============================================
+   NAMING SCREEN
+   Pet naming flow
+   ============================================ */
+
+#naming-screen h2 {
+    font-family: 'Fredoka', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+}
+
+.naming-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#naming-pet-display {
+    transform: scale(1.5);
+    margin: 20px 0;
+}
+
+.name-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+

@@ -1,0 +1,70 @@
+/* ============================================
+   SELECTION SCREEN
+   Pet choice buttons and layout
+   ============================================ */
+
+#selection-screen h2 {
+    font-family: 'Fredoka', sans-serif;
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+}
+
+.pet-choices {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pet-choice {
+    background: var(--card-bg);
+    border: 2px solid var(--card-border);
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 130px;
+}
+
+.pet-choice:hover {
+    transform: translateY(-8px) scale(1.05);
+    border-color: var(--primary);
+    background: rgba(255, 107, 157, 0.15);
+    box-shadow: 0 15px 40px rgba(255, 107, 157, 0.25);
+}
+
+.pet-choice span {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.pet-preview {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .pet-choices {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .pet-choice {
+        width: 100%;
+        max-width: 200px;
+    }
+}
+

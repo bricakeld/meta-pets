@@ -1,0 +1,215 @@
+/* ============================================
+   MAIN STYLES
+   Core layout, variables, and shared styles
+   ============================================ */
+
+:root {
+    --primary: #ff6b9d;
+    --primary-dark: #e84a7f;
+    --secondary: #7c5cff;
+    --accent: #ffd93d;
+    --success: #6bcb77;
+    --danger: #ff6b6b;
+    --bg-gradient-start: #1a1a2e;
+    --bg-gradient-mid: #16213e;
+    --bg-gradient-end: #0f3460;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(124, 92, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 217, 61, 0.08) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.app-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+header {
+    text-align: center;
+    padding: 20px 0 30px;
+}
+
+header h1 {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 30px rgba(255, 107, 157, 0.4);
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.tagline {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* ============================================
+   SCREENS
+   ============================================ */
+
+.screen {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+}
+
+.btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.5);
+}
+
+.btn.secondary {
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 2px solid var(--card-border);
+}
+
+.btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--secondary);
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.btn-icon:hover {
+    transform: scale(1.2);
+}
+
+/* ============================================
+   FORM INPUTS
+   ============================================ */
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    border: 2px solid var(--card-border);
+    border-radius: 15px;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    text-align: center;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder {
+    color: var(--text-secondary);
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+}
+
+/* ============================================
+   UTILITY ANIMATIONS
+   ============================================ */
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
