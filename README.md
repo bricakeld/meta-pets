@@ -152,14 +152,23 @@ export const CONFIG = {
 
 This project uses vanilla JavaScript ES modules. No build step required!
 
-1. Serve the files with any static server (for ES modules to work)
-2. Open in browser
+### Getting Started
+
+1. Install dependencies:
 
 ```bash
-npx serve .
+npm install
 ```
 
-Then visit `http://localhost:3000`
+2. Start the dev server with hot reload:
+
+```bash
+npm run dev
+```
+
+3. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+The dev server watches for file changes and automatically refreshes the browser.
 
 The modular architecture makes it easy for multiple contributors to work in parallel:
 
