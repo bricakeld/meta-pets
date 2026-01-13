@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="styles/components/actions.css">
     <link rel="stylesheet" href="styles/components/modal.css">
     <link rel="stylesheet" href="styles/components/colors.css">
+    <link rel="stylesheet" href="styles/components/accessories.css">
     <link rel="stylesheet" href="styles/pets/_shared.css">
     <link rel="stylesheet" href="styles/pets/dog.css">
     <link rel="stylesheet" href="styles/pets/cat.css">
@@ -87,6 +88,18 @@
             <div class="stats-panel">
                 <div id="stats-container" class="stats-container">
                     <!-- Stats are dynamically generated from STATS registry -->
+                </div>
+            </div>
+
+            <!-- Accessory Customization -->
+            <button id="accessory-toggle" class="accessory-toggle">
+                <span>✨ Accessories</span>
+                <span class="toggle-icon">▼</span>
+            </button>
+            
+            <div id="accessory-panel" class="accessory-panel hidden">
+                <div id="accessory-slots" class="accessory-slots">
+                    <!-- Accessory slots are dynamically generated -->
                 </div>
             </div>
 

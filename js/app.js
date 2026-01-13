@@ -8,12 +8,14 @@ import { savePet, loadPet, clearPet, calculateOfflineDecay } from './utils/stora
 import { PET_TYPES, getPetTemplate, getPetType, getPetColors, getDefaultColor, getPetColor } from './pets/registry.js';
 import { StatsManager, STATS, getStatIds, getStatConfig } from './features/stats.js';
 import { ActionsManager, ACTIONS, getActionIds, getActionConfig } from './features/actions.js';
+import { getAccessorySlots, getAccessoriesBySlot, getAccessory, getDefaultAccessories } from './features/accessories.js';
 
 class VirtualPet {
     constructor() {
         this.petType = null;
         this.petName = '';
         this.petColor = null;
+        this.petAccessories = getDefaultAccessories();
         
         // Initialize managers
         this.stats = new StatsManager();
@@ -172,6 +174,19 @@ class VirtualPet {
             this.changePet();
         });
         
+        // Accessory toggle
+        document.getElementById('accessory-toggle').addEventListener('click', () => {
+            this.toggleAccessoryPanel();
+        });
+        
+        // Accessory selection (event delegation)
+        document.getElementById('accessory-slots').addEventListener('click', (e) => {
+            const btn = e.target.closest('.accessory-choice');
+            if (btn) {
+                this.selectAccessory(btn.dataset.slot, btn.dataset.accessory);
+            }
+        });
+        
         // Close modal on outside click
         document.getElementById('rename-modal').addEventListener('click', (e) => {
             if (e.target.id === 'rename-modal') {
@@ -289,6 +304,110 @@ class VirtualPet {
         }
     }
     
+    // ========================================
+    // ACCESSORIES
+    // ========================================
+    
+    /**
+     * Render accessory selection slots
+     */
+    renderAccessorySlots() {
+        const container = document.getElementById('accessory-slots');
+        container.innerHTML = '';
+        
+        const slots = getAccessorySlots();
+        
+        for (const [slotId, slotData] of Object.entries(slots)) {
+            const slotElement = document.createElement('div');
+            slotElement.className = 'accessory-slot';
+            slotElement.dataset.slot = slotId;
+            
+            // Slot label
+            const label = document.createElement('div');
+            label.className = 'slot-label';
+            label.innerHTML = `<span>${slotData.icon}</span> ${slotData.name}`;
+            slotElement.appendChild(label);
+            
+            // Accessory choices
+            const choicesContainer = document.createElement('div');
+            choicesContainer.className = 'accessory-choices';
+            
+            const accessories = getAccessoriesBySlot(slotId);
+            for (const accessory of accessories) {
+                const button = document.createElement('button');
+                button.className = 'accessory-choice';
+                button.dataset.accessory = accessory.id;
+                button.dataset.slot = slotId;
+                button.title = accessory.name;
+                button.textContent = accessory.icon;
+                
+                // Mark current selection
+                if (this.petAccessories[slotId] === accessory.id) {
+                    button.classList.add('selected');
+                }
+                
+                choicesContainer.appendChild(button);
+            }
+            
+            slotElement.appendChild(choicesContainer);
+            container.appendChild(slotElement);
+        }
+    }
+    
+    /**
+     * Handle accessory selection
+     */
+    selectAccessory(slotId, accessoryId) {
+        this.petAccessories[slotId] = accessoryId;
+        
+        // Update UI selection state
+        const slotContainer = document.querySelector(`.accessory-slot[data-slot="${slotId}"]`);
+        if (slotContainer) {
+            slotContainer.querySelectorAll('.accessory-choice').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.accessory === accessoryId);
+            });
+        }
+        
+        // Apply accessories to pet display
+        this.applyAccessories(document.getElementById('main-pet-display'));
+        this.save();
+    }
+    
+    /**
+     * Apply accessories to a pet display element
+     */
+    applyAccessories(element) {
+        const petElement = element.querySelector(`.${this.petType}`);
+        if (!petElement) return;
+        
+        // Remove existing accessories
+        petElement.querySelectorAll('.accessory').forEach(acc => acc.remove());
+        
+        // Add selected accessories
+        for (const [slotId, accessoryId] of Object.entries(this.petAccessories)) {
+            const accessory = getAccessory(accessoryId);
+            if (accessory && accessory.template) {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = accessory.template;
+                const accessoryElement = wrapper.firstElementChild;
+                if (accessoryElement) {
+                    petElement.appendChild(accessoryElement);
+                }
+            }
+        }
+    }
+    
+    /**
+     * Toggle accessory panel visibility
+     */
+    toggleAccessoryPanel() {
+        const panel = document.getElementById('accessory-panel');
+        const toggle = document.getElementById('accessory-toggle');
+        
+        panel.classList.toggle('hidden');
+        toggle.classList.toggle('open');
+    }
+    
     confirmName() {
         const nameInput = document.getElementById('pet-name-input');
         const name = nameInput.value.trim();
@@ -321,6 +440,10 @@ class VirtualPet {
         // Apply pet color
         this.applyColorToElement(document.getElementById('main-pet-display'), this.petType, this.petColor);
         
+        // Render and apply accessories
+        this.renderAccessorySlots();
+        this.applyAccessories(document.getElementById('main-pet-display'));
+        
         // Update all stat displays
         for (const statId of getStatIds()) {
             const stat = getStatConfig(statId);
@@ -338,6 +461,11 @@ class VirtualPet {
         this.petType = null;
         this.petName = '';
         this.petColor = null;
+        this.petAccessories = getDefaultAccessories();
+        
+        // Reset accessory panel state
+        document.getElementById('accessory-panel').classList.add('hidden');
+        document.getElementById('accessory-toggle').classList.remove('open');
         
         document.getElementById('pet-name-input').value = '';
         this.showScreen('selection-screen');
@@ -486,6 +614,7 @@ class VirtualPet {
             petType: this.petType,
             petName: this.petName,
             petColor: this.petColor,
+            petAccessories: this.petAccessories,
             stats: this.stats.getAllValues()
         });
     }
@@ -503,6 +632,7 @@ class VirtualPet {
         this.petType = saved.petType;
         this.petName = saved.petName;
         this.petColor = saved.petColor || getDefaultColor(saved.petType);
+        this.petAccessories = saved.petAccessories || getDefaultAccessories();
         
         // Initialize managers
         this.stats.setPetType(this.petType);
