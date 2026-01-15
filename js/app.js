@@ -172,6 +172,11 @@ class VirtualPet {
             this.changePet();
         });
         
+        // Back button in naming screen
+        document.getElementById('back-to-selection-btn').addEventListener('click', () => {
+            this.backToSelection();
+        });
+        
         // Close modal on outside click
         document.getElementById('rename-modal').addEventListener('click', (e) => {
             if (e.target.id === 'rename-modal') {
@@ -343,6 +348,13 @@ class VirtualPet {
         this.showScreen('selection-screen');
         
         events.emit(EVENTS.PET_CHANGED);
+    }
+    
+    backToSelection() {
+        this.petType = null;
+        this.petColor = null;
+        document.getElementById('pet-name-input').value = '';
+        this.showScreen('selection-screen');
     }
     
     // ========================================
