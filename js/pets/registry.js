@@ -44,6 +44,12 @@ export const PET_TYPES = {
                 primary: '#4a4a4a',
                 secondary: '#333333',
                 accent: '#1a1a1a'
+            },
+            blue: {
+                name: 'Bright Blue',
+                primary: '#00bfff',
+                secondary: '#0099cc',
+                accent: '#006699'
             }
         },
         defaultColor: 'tan',
@@ -109,6 +115,12 @@ export const PET_TYPES = {
                 primary: '#f5e6d3',
                 secondary: '#e8d4bc',
                 accent: '#6b4423'
+            },
+            blue: {
+                name: 'Bright Blue',
+                primary: '#00bfff',
+                secondary: '#0099cc',
+                accent: '#006699'
             }
         },
         defaultColor: 'gray',
@@ -140,6 +152,77 @@ export const PET_TYPES = {
                     <div class="cat-leg front-right"></div>
                     <div class="cat-leg back-left"></div>
                     <div class="cat-leg back-right"></div>
+                </div>
+            </div>
+        `
+    },
+    
+    capybara: {
+        name: 'Capybara',
+        traits: {
+            hungerDecayMultiplier: 1.0,      // Capybaras eat at a normal rate
+            happinessDecayMultiplier: 0.6,   // Capybaras are super chill and stay happy
+            favoriteFood: '🍉'
+        },
+        // Available color themes for this pet
+        colors: {
+            tan: {
+                name: 'Tan',
+                primary: '#deb887',
+                secondary: '#c19a6b',
+                accent: '#8b6914'
+            },
+            golden: {
+                name: 'Golden',
+                primary: '#f4d03f',
+                secondary: '#d4ac0d',
+                accent: '#9a7d0a'
+            },
+            chocolate: {
+                name: 'Chocolate',
+                primary: '#8b5a2b',
+                secondary: '#6b4423',
+                accent: '#4a2c17'
+            },
+            white: {
+                name: 'White',
+                primary: '#f5f5f5',
+                secondary: '#e0e0e0',
+                accent: '#a0a0a0'
+            },
+            black: {
+                name: 'Black',
+                primary: '#4a4a4a',
+                secondary: '#333333',
+                accent: '#1a1a1a'
+            },
+            blue: {
+                name: 'Bright Blue',
+                primary: '#00bfff',
+                secondary: '#0099cc',
+                accent: '#006699'
+            }
+        },
+        defaultColor: 'tan',
+        template: `
+            <div class="capybara">
+                <div class="capybara-body"></div>
+                <div class="capybara-head">
+                    <div class="capybara-ear left"></div>
+                    <div class="capybara-ear right"></div>
+                    <div class="capybara-face">
+                        <div class="capybara-eye left"></div>
+                        <div class="capybara-eye right"></div>
+                        <div class="capybara-snout">
+                            <div class="capybara-nose"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="capybara-legs">
+                    <div class="capybara-leg front-left"></div>
+                    <div class="capybara-leg front-right"></div>
+                    <div class="capybara-leg back-left"></div>
+                    <div class="capybara-leg back-right"></div>
                 </div>
             </div>
         `
