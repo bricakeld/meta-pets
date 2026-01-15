@@ -6,7 +6,6 @@
     "dev": "live-server --port=3000 --no-browser"
   },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.0"
   }
 }
-

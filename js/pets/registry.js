@@ -13,53 +13,104 @@ export const PET_TYPES = {
             happinessDecayMultiplier: 0.8,   // Dogs stay happy longer
             favoriteFood: '🦴'
         },
-        // Available color themes for this pet
+        // Available color themes for this pet (inspired by popular breeds)
         colors: {
-            tan: {
-                name: 'Tan',
-                primary: '#deb887',
-                secondary: '#c19a6b',
-                accent: '#8b6914'
+            boxer: {
+                name: 'Boxer',
+                primary: '#c9a66b',      // Fawn body
+                secondary: '#a67c52',    // Darker fawn
+                accent: '#4a3728',       // Dark muzzle
+                breed: 'boxer'
             },
-            golden: {
-                name: 'Golden',
-                primary: '#f4d03f',
-                secondary: '#d4ac0d',
-                accent: '#9a7d0a'
+            chihuahua: {
+                name: 'Chihuahua',
+                primary: '#d4a574',      // Fawn/tan
+                secondary: '#b8956a',    // Darker tan
+                accent: '#8b6914',       // Brown accents
+                breed: 'chihuahua'
             },
-            chocolate: {
-                name: 'Chocolate',
-                primary: '#8b5a2b',
-                secondary: '#6b4423',
-                accent: '#4a2c17'
+            poodle: {
+                name: 'Brown Poodle',
+                primary: '#6b4423',      // Rich chocolate brown
+                secondary: '#543621',    // Deeper brown
+                accent: '#3d2817',       // Dark brown
+                breed: 'poodle'
             },
-            white: {
-                name: 'White',
-                primary: '#f5f5f5',
-                secondary: '#e0e0e0',
-                accent: '#a0a0a0'
+            westie: {
+                name: 'Westie',
+                primary: '#fafafa',      // Bright white
+                secondary: '#f0f0f0',    // Soft white
+                accent: '#d4d4d4',       // Light gray accents
+                breed: 'westie'
             },
-            black: {
-                name: 'Black',
-                primary: '#4a4a4a',
-                secondary: '#333333',
-                accent: '#1a1a1a'
-            },
-            blue: {
-                name: 'Bright Blue',
-                primary: '#00bfff',
-                secondary: '#0099cc',
-                accent: '#006699'
+            schnauzer: {
+                name: 'Schnauzer',
+                primary: '#8a8a8a',      // Salt & pepper gray
+                secondary: '#6b6b6b',    // Darker gray
+                accent: '#4a4a4a',       // Charcoal
+                breed: 'schnauzer'
             }
         },
-        defaultColor: 'tan',
+        defaultColor: 'boxer',
+        // Template function that accepts breed for breed-specific features
+        getTemplate: (breed = 'boxer') => {
+            const breedFeatures = {
+                'boxer': `
+                    <div class="dog-snout boxer-snout"></div>
+                    <div class="dog-mask"></div>
+                `,
+                'chihuahua': `
+                    <div class="dog-snout chihuahua-snout"></div>
+                `,
+                'poodle': `
+                    <div class="dog-snout poodle-snout"></div>
+                    <div class="dog-topknot"></div>
+                    <div class="dog-pom"></div>
+                `,
+                'westie': `
+                    <div class="dog-snout westie-snout"></div>
+                `,
+                'schnauzer': `
+                    <div class="dog-snout schnauzer-snout"></div>
+                    <div class="dog-eyebrow left"></div>
+                    <div class="dog-eyebrow right"></div>
+                    <div class="dog-beard"></div>
+                `
+            };
+            
+            return `
+                <div class="dog breed-${breed}">
+                    <div class="dog-body"></div>
+                    <div class="dog-head">
+                        <div class="dog-ear left"></div>
+                        <div class="dog-ear right"></div>
+                        <div class="dog-face">
+                            ${breedFeatures[breed] || ''}
+                            <div class="dog-eye left"></div>
+                            <div class="dog-eye right"></div>
+                            <div class="dog-nose"></div>
+                            <div class="dog-mouth"></div>
+                        </div>
+                    </div>
+                    <div class="dog-tail"></div>
+                    <div class="dog-legs">
+                        <div class="dog-leg front-left"></div>
+                        <div class="dog-leg front-right"></div>
+                        <div class="dog-leg back-left"></div>
+                        <div class="dog-leg back-right"></div>
+                    </div>
+                </div>
+            `;
+        },
         template: `
-            <div class="dog">
+            <div class="dog breed-boxer">
                 <div class="dog-body"></div>
                 <div class="dog-head">
                     <div class="dog-ear left"></div>
                     <div class="dog-ear right"></div>
                     <div class="dog-face">
+                        <div class="dog-snout boxer-snout"></div>
+                        <div class="dog-mask"></div>
                         <div class="dog-eye left"></div>
                         <div class="dog-eye right"></div>
                         <div class="dog-nose"></div>
@@ -241,11 +292,22 @@ export function getPetType(typeId) {
 /**
  * Get the HTML template for a pet type
  * @param {string} typeId - Pet type identifier
+ * @param {string} colorId - Optional color/breed identifier for breed-specific template
  * @returns {string} HTML template string
  */
-export function getPetTemplate(typeId) {
+export function getPetTemplate(typeId, colorId = null) {
     const pet = getPetType(typeId);
-    return pet ? pet.template : '';
+    if (!pet) return '';
+    
+    // If pet has a getTemplate function and color has breed info, use breed-specific template
+    if (pet.getTemplate && colorId) {
+        const color = pet.colors?.[colorId];
+        if (color?.breed) {
+            return pet.getTemplate(color.breed);
+        }
+    }
+    
+    return pet.template;
 }
 
 /**
