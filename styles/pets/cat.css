@@ -144,12 +144,12 @@
 
 .cat-tail {
     position: absolute;
-    width: 30px;
-    height: 8px;
+    width: 28px;
+    height: 7px;
     background: linear-gradient(90deg, var(--cat-secondary), var(--cat-accent));
-    border-radius: 5px;
-    top: 22px;
-    left: -18px;
+    border-radius: 4px 4px 5px 5px;
+    top: 26px;
+    left: -16px;
     transform-origin: right center;
     animation: catTailSwish 2s ease-in-out infinite;
 }
@@ -161,7 +161,7 @@
 
 .cat-legs {
     position: absolute;
-    bottom: -5px;
+    top: 38px;
     width: 100%;
 }
 
@@ -170,11 +170,11 @@
     width: 8px;
     height: 12px;
     background: linear-gradient(180deg, var(--cat-secondary), var(--cat-accent));
-    border-radius: 4px;
+    border-radius: 3px 3px 4px 4px;
 }
 
-.cat-leg.front-left { left: 35px; }
-.cat-leg.front-right { left: 45px; }
+.cat-leg.front-left { left: 36px; }
+.cat-leg.front-right { left: 46px; }
 .cat-leg.back-left { left: 10px; }
 .cat-leg.back-right { left: 20px; }
 

@@ -19,10 +19,37 @@
 
 .color-choices {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 280px;
+    max-width: 400px;
+}
+
+.color-choice-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.color-choice-label {
+    font-size: 0.7rem;
+    color: var(--text-secondary, #666);
+    font-weight: 500;
+    text-align: center;
+    max-width: 60px;
+    line-height: 1.2;
+    transition: color 0.2s ease;
+}
+
+.color-choice-wrapper:hover .color-choice-label {
+    color: var(--text-primary, #333);
+}
+
+.color-choice.selected + .color-choice-label {
+    color: var(--primary, #6c5ce7);
+    font-weight: 600;
 }
 
 .color-choice {

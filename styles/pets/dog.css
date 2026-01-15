@@ -4,10 +4,10 @@
    ============================================ */
 
 .dog {
-    /* Default colors (can be overridden via inline styles) */
-    --dog-primary: #deb887;
-    --dog-secondary: #c19a6b;
-    --dog-accent: #8b6914;
+    /* Default colors - Boxer (can be overridden via inline styles) */
+    --dog-primary: #c9a66b;
+    --dog-secondary: #a67c52;
+    --dog-accent: #4a3728;
     
     position: relative;
     width: 70px;
@@ -116,11 +116,11 @@
 .dog-tail {
     position: absolute;
     width: 8px;
-    height: 20px;
+    height: 18px;
     background: linear-gradient(180deg, var(--dog-secondary), var(--dog-primary));
-    border-radius: 5px;
-    top: 12px;
-    left: -3px;
+    border-radius: 5px 5px 4px 4px;
+    top: 22px;
+    left: 2px;
     transform-origin: bottom center;
     animation: tailWag 0.3s ease-in-out infinite;
 }
@@ -132,22 +132,22 @@
 
 .dog-legs {
     position: absolute;
-    bottom: -5px;
+    top: 40px;
     width: 100%;
 }
 
 .dog-leg {
     position: absolute;
     width: 10px;
-    height: 12px;
+    height: 14px;
     background: linear-gradient(180deg, var(--dog-secondary), var(--dog-primary));
-    border-radius: 5px;
+    border-radius: 3px 3px 4px 4px;
 }
 
-.dog-leg.front-left { left: 35px; }
+.dog-leg.front-left { left: 38px; }
 .dog-leg.front-right { left: 48px; }
 .dog-leg.back-left { left: 8px; }
-.dog-leg.back-right { left: 20px; }
+.dog-leg.back-right { left: 18px; }
 
 /* Dog-specific animations */
 .pet-eating .dog {
@@ -158,5 +158,464 @@
 .pet-hungry .dog-body,
 .pet-hungry .dog-head {
     filter: saturate(0.5);
+}
+
+/* ============================================
+   BREED-SPECIFIC STYLES
+   ============================================ */
+
+/* --- Snout Base Styles --- */
+.dog-snout {
+    position: absolute;
+    background: var(--dog-primary);
+    border-radius: 50%;
+}
+
+/* --- BOXER --- */
+/* Short, square snout with black mask */
+.breed-boxer .dog-head {
+    width: 32px;
+    height: 30px;
+    border-radius: 45% 45% 40% 40%;
+}
+
+.breed-boxer .dog-ear {
+    width: 14px;
+    height: 20px;
+    border-radius: 40% 40% 50% 50%;
+    top: -2px;
+}
+
+.breed-boxer .dog-ear.left {
+    transform: rotate(-25deg);
+}
+
+.breed-boxer .dog-ear.right {
+    transform: rotate(25deg);
+}
+
+.boxer-snout {
+    width: 18px;
+    height: 10px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dog-secondary);
+    border-radius: 30% 30% 50% 50%;
+}
+
+.dog-mask {
+    position: absolute;
+    width: 20px;
+    height: 14px;
+    background: var(--dog-accent);
+    border-radius: 40% 40% 50% 50%;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.85;
+}
+
+.breed-boxer .dog-body {
+    width: 48px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.breed-boxer .dog-legs {
+    top: 42px;
+}
+
+.breed-boxer .dog-leg {
+    width: 11px;
+    height: 16px;
+}
+
+.breed-boxer .dog-leg.front-left { left: 40px; }
+.breed-boxer .dog-leg.front-right { left: 50px; }
+.breed-boxer .dog-leg.back-left { left: 8px; }
+.breed-boxer .dog-leg.back-right { left: 19px; }
+
+.breed-boxer .dog-tail {
+    width: 7px;
+    height: 12px;
+    top: 24px;
+    left: 3px;
+    border-radius: 4px;
+}
+
+/* --- CHIHUAHUA --- */
+/* Huge erect ears, apple-shaped head, tiny body, big eyes */
+.breed-chihuahua .dog-head {
+    width: 26px;
+    height: 24px;
+    border-radius: 50%;
+    top: 6px;
+}
+
+.breed-chihuahua .dog-ear {
+    width: 16px;
+    height: 20px;
+    border-radius: 50% 50% 20% 20%;
+    top: -14px;
+    background: linear-gradient(180deg, var(--dog-primary), var(--dog-secondary));
+}
+
+.breed-chihuahua .dog-ear.left {
+    left: -4px;
+    transform: rotate(-30deg);
+}
+
+.breed-chihuahua .dog-ear.right {
+    right: -4px;
+    transform: rotate(30deg);
+}
+
+.chihuahua-snout {
+    width: 10px;
+    height: 8px;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dog-secondary);
+    border-radius: 30% 30% 50% 50%;
+}
+
+.breed-chihuahua .dog-eye {
+    width: 9px;
+    height: 9px;
+    top: 8px;
+}
+
+.breed-chihuahua .dog-eye.left {
+    left: 4px;
+}
+
+.breed-chihuahua .dog-eye.right {
+    right: 4px;
+}
+
+.breed-chihuahua .dog-body {
+    width: 35px;
+    height: 22px;
+    border-radius: 50% 40% 40% 50%;
+}
+
+.breed-chihuahua .dog-legs {
+    top: 36px;
+}
+
+.breed-chihuahua .dog-leg {
+    width: 6px;
+    height: 10px;
+    border-radius: 2px 2px 3px 3px;
+}
+
+.breed-chihuahua .dog-leg.front-left { left: 32px; }
+.breed-chihuahua .dog-leg.front-right { left: 40px; }
+.breed-chihuahua .dog-leg.back-left { left: 8px; }
+.breed-chihuahua .dog-leg.back-right { left: 16px; }
+
+.breed-chihuahua .dog-tail {
+    width: 4px;
+    height: 16px;
+    border-radius: 3px 3px 2px 2px;
+    top: 18px;
+    left: 4px;
+    transform-origin: bottom center;
+}
+
+/* --- POODLE --- */
+/* Curly topknot, elegant build, pom-pom accents */
+.breed-poodle .dog-head {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+}
+
+.breed-poodle .dog-ear {
+    width: 10px;
+    height: 24px;
+    border-radius: 40%;
+    top: 0px;
+}
+
+.breed-poodle .dog-ear.left {
+    left: -2px;
+    transform: rotate(-10deg);
+}
+
+.breed-poodle .dog-ear.right {
+    right: -2px;
+    transform: rotate(10deg);
+}
+
+.poodle-snout {
+    width: 10px;
+    height: 10px;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dog-secondary);
+    border-radius: 40%;
+}
+
+.dog-topknot {
+    position: absolute;
+    width: 20px;
+    height: 14px;
+    background: radial-gradient(circle at 30% 30%, var(--dog-primary), var(--dog-secondary));
+    border-radius: 50% 50% 40% 40%;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        inset 2px 2px 4px rgba(255,255,255,0.2),
+        inset -2px -2px 4px rgba(0,0,0,0.1);
+}
+
+.dog-topknot::before,
+.dog-topknot::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--dog-primary);
+    border-radius: 50%;
+}
+
+.dog-topknot::before {
+    top: 2px;
+    left: -2px;
+}
+
+.dog-topknot::after {
+    top: 4px;
+    right: -2px;
+}
+
+.dog-pom {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle at 40% 40%, var(--dog-primary), var(--dog-secondary));
+    border-radius: 50%;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.breed-poodle .dog-body {
+    width: 40px;
+    height: 26px;
+    border-radius: 50% 40% 40% 50%;
+}
+
+.breed-poodle .dog-legs {
+    top: 38px;
+}
+
+.breed-poodle .dog-leg {
+    width: 7px;
+    height: 18px;
+    border-radius: 3px 3px 5px 5px;
+}
+
+.breed-poodle .dog-leg.front-left { left: 36px; }
+.breed-poodle .dog-leg.front-right { left: 45px; }
+.breed-poodle .dog-leg.back-left { left: 8px; }
+.breed-poodle .dog-leg.back-right { left: 17px; }
+
+.breed-poodle .dog-tail {
+    width: 5px;
+    height: 20px;
+    border-radius: 3px 3px 50% 50%;
+    top: 20px;
+    left: 4px;
+}
+
+/* --- WESTIE --- */
+/* Small erect ears, square fluffy face, compact body */
+.breed-westie .dog-head {
+    width: 28px;
+    height: 26px;
+    border-radius: 25% 25% 30% 30%;
+    background: radial-gradient(circle at 40% 40%, var(--dog-primary), var(--dog-secondary));
+}
+
+.breed-westie .dog-ear {
+    width: 10px;
+    height: 14px;
+    border-radius: 40% 40% 20% 20%;
+    top: -8px;
+    background: linear-gradient(180deg, var(--dog-primary), var(--dog-secondary));
+}
+
+.breed-westie .dog-ear.left {
+    left: 2px;
+    transform: rotate(-5deg);
+}
+
+.breed-westie .dog-ear.right {
+    right: 2px;
+    transform: rotate(5deg);
+}
+
+.westie-snout {
+    width: 14px;
+    height: 10px;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dog-secondary);
+    border-radius: 20% 20% 40% 40%;
+}
+
+.breed-westie .dog-body {
+    width: 42px;
+    height: 26px;
+    border-radius: 40%;
+    background: radial-gradient(ellipse at 50% 40%, var(--dog-primary), var(--dog-secondary));
+}
+
+.breed-westie .dog-nose {
+    background: #1a1a1a;
+}
+
+.breed-westie .dog-legs {
+    top: 38px;
+}
+
+.breed-westie .dog-leg {
+    width: 9px;
+    height: 12px;
+    border-radius: 3px 3px 4px 4px;
+}
+
+.breed-westie .dog-leg.front-left { left: 36px; }
+.breed-westie .dog-leg.front-right { left: 46px; }
+.breed-westie .dog-leg.back-left { left: 8px; }
+.breed-westie .dog-leg.back-right { left: 18px; }
+
+.breed-westie .dog-tail {
+    width: 7px;
+    height: 14px;
+    border-radius: 4px;
+    top: 22px;
+    left: 4px;
+}
+
+/* --- SCHNAUZER --- */
+/* Distinctive eyebrows and beard, angular build */
+.breed-schnauzer .dog-head {
+    width: 28px;
+    height: 28px;
+    border-radius: 40% 40% 45% 45%;
+}
+
+.breed-schnauzer .dog-ear {
+    width: 10px;
+    height: 12px;
+    border-radius: 30% 30% 50% 50%;
+    top: -6px;
+    background: var(--dog-accent);
+}
+
+.breed-schnauzer .dog-ear.left {
+    left: 2px;
+    transform: rotate(-15deg);
+}
+
+.breed-schnauzer .dog-ear.right {
+    right: 2px;
+    transform: rotate(15deg);
+}
+
+.schnauzer-snout {
+    width: 14px;
+    height: 12px;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dog-secondary);
+    border-radius: 30% 30% 50% 50%;
+}
+
+.dog-eyebrow {
+    position: absolute;
+    width: 10px;
+    height: 5px;
+    background: var(--dog-accent);
+    border-radius: 50% 50% 30% 30%;
+    top: 6px;
+}
+
+.dog-eyebrow.left {
+    left: 3px;
+    transform: rotate(-10deg);
+}
+
+.dog-eyebrow.right {
+    right: 3px;
+    transform: rotate(10deg);
+}
+
+.dog-beard {
+    position: absolute;
+    width: 16px;
+    height: 10px;
+    background: linear-gradient(180deg, var(--dog-secondary), var(--dog-primary));
+    border-radius: 30% 30% 50% 50%;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dog-beard::before,
+.dog-beard::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--dog-primary);
+    border-radius: 50%;
+    bottom: -2px;
+}
+
+.dog-beard::before {
+    left: 1px;
+}
+
+.dog-beard::after {
+    right: 1px;
+}
+
+.breed-schnauzer .dog-body {
+    width: 46px;
+    height: 26px;
+    border-radius: 15px;
+}
+
+.breed-schnauzer .dog-legs {
+    top: 38px;
+}
+
+.breed-schnauzer .dog-leg {
+    width: 9px;
+    height: 15px;
+    border-radius: 3px 3px 4px 4px;
+}
+
+.breed-schnauzer .dog-leg.front-left { left: 38px; }
+.breed-schnauzer .dog-leg.front-right { left: 48px; }
+.breed-schnauzer .dog-leg.back-left { left: 8px; }
+.breed-schnauzer .dog-leg.back-right { left: 18px; }
+
+.breed-schnauzer .dog-tail {
+    width: 6px;
+    height: 10px;
+    border-radius: 3px;
+    top: 22px;
+    left: 4px;
 }
 

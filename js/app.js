@@ -126,9 +126,13 @@ class VirtualPet {
         
         // Color selection (event delegation)
         document.getElementById('color-choices').addEventListener('click', (e) => {
-            const btn = e.target.closest('.color-choice');
-            if (btn) {
-                this.selectColor(btn.dataset.color);
+            // Handle clicks on the button or anywhere in the wrapper
+            const wrapper = e.target.closest('.color-choice-wrapper');
+            if (wrapper) {
+                const btn = wrapper.querySelector('.color-choice');
+                if (btn) {
+                    this.selectColor(btn.dataset.color);
+                }
             }
         });
         
@@ -209,7 +213,9 @@ class VirtualPet {
         
         // Update naming screen
         document.getElementById('pet-type-label').textContent = petData.name;
-        document.getElementById('naming-pet-display').innerHTML = getPetTemplate(type);
+        
+        // Get breed-specific template
+        document.getElementById('naming-pet-display').innerHTML = getPetTemplate(type, this.petColor);
         
         // Render color choices
         this.renderColorChoices(type);
@@ -232,11 +238,15 @@ class VirtualPet {
         const defaultColor = getDefaultColor(petType);
         
         for (const [colorId, colorData] of Object.entries(colors)) {
+            // Create wrapper for color choice and label
+            const wrapper = document.createElement('div');
+            wrapper.className = 'color-choice-wrapper';
+            
             const button = document.createElement('button');
             button.className = 'color-choice';
             button.dataset.color = colorId;
             button.title = colorData.name;
-            button.setAttribute('aria-label', `Select ${colorData.name} color`);
+            button.setAttribute('aria-label', `Select ${colorData.name}`);
             
             // Set CSS custom properties for the button gradient
             button.style.setProperty('--color-primary', colorData.primary);
@@ -248,7 +258,14 @@ class VirtualPet {
                 button.classList.add('selected');
             }
             
-            container.appendChild(button);
+            // Create breed label
+            const label = document.createElement('span');
+            label.className = 'color-choice-label';
+            label.textContent = colorData.name;
+            
+            wrapper.appendChild(button);
+            wrapper.appendChild(label);
+            container.appendChild(wrapper);
         }
     }
     
@@ -263,9 +280,12 @@ class VirtualPet {
             btn.classList.toggle('selected', btn.dataset.color === colorId);
         });
         
-        // Apply color to preview pet
+        // Apply color to preview pet - regenerate template for breed-specific features
         const previewDisplay = document.getElementById('naming-pet-display');
         previewDisplay.classList.add('color-changing');
+        
+        // Get breed-specific template
+        previewDisplay.innerHTML = getPetTemplate(this.petType, colorId);
         this.applyColorToElement(previewDisplay, this.petType, colorId);
         
         setTimeout(() => {
@@ -316,7 +336,9 @@ class VirtualPet {
     
     setupPetScreen() {
         document.getElementById('display-name').textContent = this.petName;
-        document.getElementById('main-pet-display').innerHTML = getPetTemplate(this.petType);
+        
+        // Get breed-specific template
+        document.getElementById('main-pet-display').innerHTML = getPetTemplate(this.petType, this.petColor);
         
         // Apply pet color
         this.applyColorToElement(document.getElementById('main-pet-display'), this.petType, this.petColor);
